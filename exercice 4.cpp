@@ -2,41 +2,55 @@
 using namespace std;
 
 int main() {
-    // 1. Déclaration d'un entier a (non initialisé)
-    int a=23;
+    int taille;
+    int *tableau1;
+    int *tableau2;
     
-    // 2. Déclaration d'une référence vers cet entier
-    int &ref_a = a;
+    // Demander la taille du tableau
+    cout << "Entrez la taille du tableau : ";
+    cin >> taille;
     
-    // 3. Déclaration d'un pointeur vers cet entier
-    int *p_a = &a;
+    // 1. Allocation dynamique du premier tableau
+    tableau1 = new int[taille];
     
-    cout << "=== Affichage des variables ===" << endl << endl;
-    
-    // 4. Affichage des variables, leurs adresses et valeurs
-    
-    cout << "Variable a :" << endl;
-    cout << "  Valeur de a       : " << a << endl;
-    cout << "  Adresse de a      : " << &a << endl;
-    cout << endl;
-    
-    cout << "Reference ref_a :" << endl;
-    cout << "  Valeur de ref_a   : " << ref_a << endl;
-    cout << "  Adresse de ref_a  : " << &ref_a << endl;
-    cout << endl;
-    
-    cout << "Pointeur p_a :" << endl;
-    cout << "  Valeur de p_a (adresse stockee) : " << p_a << endl;
-    cout << "  Adresse de p_a                  : " << &p_a << endl;
-    cout << "  Valeur pointee par p_a (*p_a)   : " << *p_a << endl;
-    cout << endl;
-    
-    // Vérification
-    cout << "=== Verification ===" << endl;
-    cout << "a, ref_a et *p_a pointent vers la meme adresse ? ";
-    if (&a == &ref_a && &a == p_a) {
-        cout << "OUI" << endl;
+    // Lecture des nombres entiers
+    cout << "Entrez " << taille << " nombres entiers :" << endl;
+    for (int i = 0; i < taille; i++) {
+        cout << "Nombre " << (i + 1) << " : ";
+        cin >> tableau1[i];
     }
+    
+    // Affichage du premier tableau
+    cout << "\nPremier tableau :" << endl;
+    for (int i = 0; i < taille; i++) {
+        cout << tableau1[i] << " ";
+    }
+    cout << endl;
+    
+    // 2. Création dynamique du second tableau pour les carrés
+    tableau2 = new int[taille];
+    
+    // Calcul des carrés
+    for (int i = 0; i < taille; i++) {
+        tableau2[i] = tableau1[i] * tableau1[i];
+    }
+    
+    // 3. Suppression du premier tableau
+    delete[] tableau1;
+    tableau1 = nullptr;  // Bonne pratique
+    
+    // Affichage du second tableau (les carrés)
+    cout << "\nTableau des carres :" << endl;
+    for (int i = 0; i < taille; i++) {
+        cout << tableau2[i] << " ";
+    }
+    cout << endl;
+    
+    // Suppression du second tableau
+    delete[] tableau2;
+    tableau2 = nullptr;  // Bonne pratique
+    
+    cout << "\nMemoire liberee avec succes !" << endl;
     
     return 0;
 }
